@@ -5,6 +5,11 @@ import dayjs from 'dayjs'
 
 const client = new WebhookClient({
     url: process.env.DISCORD_WEBHOOK_URL,
+}, {
+    rest: {
+        timeout: 60000,
+        retries: 5
+    }
 })
 
 let msgID = ''
@@ -51,7 +56,7 @@ async function run() {
                     name: 'file.png'
                 }]
             })
-            fs.writeFileSync('./IDmsg.txt', msg.id , 'utf8')
+            fs.writeFileSync('./IDmsg.txt', msg.id, 'utf8')
         } catch (err) {
             console.error(err)
         }
